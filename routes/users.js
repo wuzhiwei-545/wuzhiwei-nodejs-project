@@ -54,4 +54,12 @@ router.post('/login',function(req,res){
     }
   })
 })
+
+//退出登录
+router.get('/logout',function(req,res){
+  res.clearCookie('username');
+  res.clearCookie('nickname');
+  res.clearCookie('isAdmin');
+  res.redirect('/login.html');
+})
 module.exports = router;

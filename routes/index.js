@@ -5,7 +5,12 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   // 判断用户是否已经登录，如果登录就返回首页，否则返回登录页面
   if(req.cookies.username){
-    res.render('index', { title: 'Express' });
+    //需要将用户登录信息传递给页面
+    res.render('index', {
+      username: req.cookies.username,
+      nickname: req.cookies.nickname,
+      isAdmin: parseInt(req.cookies.isAdmin) ? '(管理员)' : ''
+    });
   }else{
     //跳转到登录页面
     res.redirect('/login.html');

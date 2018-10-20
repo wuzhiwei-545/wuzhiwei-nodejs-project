@@ -1,0 +1,34 @@
+.index {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.index .header {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid #000;
+}
+.index .container {
+    flex: 1;
+    display: flex;
+}
+.container .menu {
+    width: 260px;
+    height: 100%;
+    border-right: 1px solid #000;
+}
+.container .main {
+    flex: 1;
+    height: 100%;
+}
+/* ===========头部样式========== */
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+.header .header_left {
+
+}
+.header .header_right {
+    display: flex;
+}
