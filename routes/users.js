@@ -40,6 +40,16 @@ router.post('/login',function(req,res){
     }else{
       //跳转到首页
       console.log('当前登录用户的信息是',data);
+      //写 cookie
+      res.cookie('username',data.username,{
+        maxAge: 1000 * 60 * 60
+      })
+      res.cookie('nickname',data.nickname,{
+        maxAge: 1000 * 60 * 60
+      })
+      res.cookie('isAdmin',data.isAdmin,{
+        maxAge: 1000 * 60 * 60
+      })
       res.redirect('/')
     }
   })
