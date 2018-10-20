@@ -30,4 +30,18 @@ router.post('/register',function(req,res){
     }
   });
 });
+
+//登录操作
+router.post('/login',function(req,res){
+  //调用 userModel 里面的 login 方法
+  usersModel.login(req.body,function(err,data){
+    if(err){
+      res.render('weerror',err);
+    }else{
+      //跳转到首页
+      console.log('当前登录用户的信息是',data);
+      res.redirect('/')
+    }
+  })
+})
 module.exports = router;
