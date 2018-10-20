@@ -1,10 +1,13 @@
 <div class="menu">
     <ul>
+        <% if(isAdmin){ %>
+            <li class="menu_item">
+                <a href="#">用户管理</a>
+            </li>
+        <% } %>
+        
         <li class="menu_item">
-            <a href="#">用户管理</a>
-        </li>
-        <li class="menu_item">
-            <a href="#">用户管理</a>
+            <a href="#">手机管理</a>
         </li>
     </ul>
 </div>

@@ -12,7 +12,7 @@
   <div class="index">
     <%- include('./common/header.ejs',{ nickname: nickname, isAdmin: isAdmin }) %>
     <div class="container">
-      <%- include('./common/menu.ejs') %>
+      <%- include('./common/menu.ejs', { isAdmin: isAdmin }) %>
       <div class="main"></div>
     </div>
   </div>
