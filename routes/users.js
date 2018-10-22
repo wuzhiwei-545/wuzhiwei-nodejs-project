@@ -57,9 +57,13 @@ router.post('/login',function(req,res){
 
 //退出登录
 router.get('/logout',function(req,res){
+  // if(!req.cookies.username){
+  //   res.redirect('/login.html');
+  // }
   res.clearCookie('username');
   res.clearCookie('nickname');
   res.clearCookie('isAdmin');
-  res.redirect('/login.html');
+  // res.redirect('/login.html');
+  res.send('<script>location.replace("/")</script>');
 })
 module.exports = router;
