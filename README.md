@@ -37,3 +37,23 @@ cookies  localstorage
 
 # 首页
 
+#用户管理页面
+
+1.查询所有用户的数据
+2.分页功能
+    2.1页面需要传递参数(页码 page)
+    2.2后台需要返回数据结构
+    {
+        userList: [{username: '',age: ''},{}],
+        totalPage: '', //总页数
+        page: '', //当前页码
+    }
+    2.3 数据库查询
+    pageSize 每页显示多少条数
+
+    .find().limit(pageSize).skip(page * pageSize - pageSize).toArray()
+
+#搜索
+
+var nickname = new RegExp(nickname) => /zhangsan/
+db.find(nickname: nickname)
