@@ -37,23 +37,40 @@ router.get('/user-manages.html',function(req,res){
     //从前端取得2个参数
     let page = req.query.page || 1; //页码
     let pageSize = req.query.pageSize || 5; //每页显示条数
-    usersModel.getUserList({
-      page: page,
-      pageSize: pageSize
-    },function(err,data){
-      if(err){
-        res.render('weerror',err);
-      }else{
-        res.render('user-manages',{
-          username: req.cookies.username,
-          nickname: req.cookies.nickname,
-          isAdmin: parseInt(req.cookies.isAdmin) ? '(管理员)' : '',
-          userList: data.userList,
-          totalPage: data.totalPage,
-          page: data.page
-        })
-      }
-    });
+    if(req.query.nickname){
+      usersModel.finduser(req.query.nickname,function(err,data){
+        if(err){
+          res.render('weerror',err);
+        }else{
+          res.render('user-manages',{
+            username: req.cookies.username,
+            nickname: req.cookies.nickname,
+            isAdmin: parseInt(req.cookies.isAdmin) ? '(管理员)' : '',
+            userList: data,
+            totalPage: 1,
+            page: 1
+          })
+        }
+      })
+    }else{
+      usersModel.getUserList({
+        page: page,
+        pageSize: pageSize
+      },function(err,data){
+        if(err){
+          res.render('weerror',err);
+        }else{
+          res.render('user-manages',{
+            username: req.cookies.username,
+            nickname: req.cookies.nickname,
+            isAdmin: parseInt(req.cookies.isAdmin) ? '(管理员)' : '',
+            userList: data.userList,
+            totalPage: data.totalPage,
+            page: data.page
+          })
+        }
+      });
+    }  
   }else{
     res.redirect('/login.html');
   }

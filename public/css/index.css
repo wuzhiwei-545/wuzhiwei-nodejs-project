@@ -1,3 +1,6 @@
+a {
+    text-decoration: none;
+}
 .index {
     display: flex;
     flex-direction: column;
@@ -6,29 +9,140 @@
 .index .header {
     height: 60px;
     line-height: 60px;
-    border-bottom: 1px solid #000;
+    padding: 0 30px;
+    background: #202329;
+    color: #fff;
+}
+.header h2 {
+    font-size: 22px;
+    color: #00d7c6;
+    font-weight: normal;
+}
+.header_right a {
+    display: inline-block;
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 10px;
+    margin-top: 14px;
+    border: 1px solid #00d7c6;
+    border-radius: 20px;
+    color: #fff;
+    text-align: center;
 }
 .index .container {
     flex: 1;
     display: flex;
+    position: relative;
 }
 .container .menu {
-    width: 260px;
+    width: 180px;
     height: 100%;
     border-right: 1px solid #000;
+}
+.menu_item {
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 900;
+}
+.menu_item a {
+    color: #333333;
 }
 .container .main {
     flex: 1;
     height: 100%;
+    padding: 30px;
 }
+.main table {
+    width: 100%;
+    text-align: center;
+}
+.main table th {
+    border: 1px solid #000;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+.main table td {
+    border: 1px solid #000;
+    height: 40px;
+    line-height: 40px;
+}
+.searcharea {
+    width: 386px;
+    height: 40px;
+    border: 1px solid #000;
+    border-radius: 20px;
+    line-height: 40px;
+    padding-left: 20px;
+    overflow: hidden;
+    margin: 20px;
+}
+.nick {
+    width: 260px;
+    height: 40px;
+    border: 0;
+    outline: none;
+}
+#search {
+    width: 100px;
+    height: 40px;
+    border: 0;
+    outline: none;
+    background: #00d7c6;
+    color: #fff;
+    font-size: 16px;
+}
+
+
 /* ===========头部样式========== */
 .header {
     display: flex;
     justify-content: space-between;
 }
-.header .header_left {
-
-}
 .header .header_right {
     display: flex;
+}
+#update {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border: 1px solid #000;
+    background: #fff;
+    left: 50%;
+    margin-left: -250px;
+    top: 50%;
+    margin-top: -250px;
+    padding: 20px;
+    display: none;
+}
+#update h2 {
+    text-align: center;
+}
+#update .sure{
+    width: 150px;
+    height: 50px;
+    margin: 20px 50px;
+    background: #3385ff;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    font-size: 18px;
+    float: left;
+    border-radius: 20px;
+    border: 0;
+    outline: none;
+}
+#update .cancel {
+    width: 148px;
+    height: 48px;
+    margin-top: 20px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 18px;
+    float: left;
+    border-radius: 20px;
+    border: 1px solid #000;
+    cursor: pointer;
 }

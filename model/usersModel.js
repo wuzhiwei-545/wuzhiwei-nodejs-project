@@ -49,13 +49,23 @@ const usersModel = {
                         }
                     });
                 },
+                // function(callback){
+                //     //查询表的所有记录条数
+                //     db.collection('users').find().count(function(err,num){
+                //         if(err){
+                //             callback({ code: -101, msg: '查询所有记录条数失败' });
+                //         }else{
+                //             saveData._id = num + 1;
+                //             callback(null);
+                //         }
+                //     })
+                // },
                 function(callback){
-                    //查询表的所有记录条数
-                    db.collection('users').find().count(function(err,num){
+                    db.collection('users').find().toArray(function(err,data){
                         if(err){
-                            callback({ code: -101, msg: '查询所有记录条数失败' });
+                            callback({ code: -101, msg: '查询所有记录失败 '});
                         }else{
-                            saveData._id = num + 1;
+                            saveData._id = data[data.length-1]._id + 1;
                             callback(null);
                         }
                     })
@@ -205,6 +215,87 @@ const usersModel = {
                 })
             }
         })
+    },
+
+    /**
+     * 用户列表昵称搜索
+     * @param {Object} data 昵称
+     * @param {Function} cb 
+     */
+    finduser(data,cb){
+        MongoClient.connect(url,function(err,client){
+            if(err){
+                cb({ code: -100, msg: '连接数据库失败' });
+            }else{
+                var db = client.db('firstProject');
+                var nickname = new RegExp(data);
+                db.collection('users').find({nickname: nickname}).toArray(function(err,data){
+                    if(err){
+                        cb({ code: -101, msg: '查询数据库失败'});
+                        // client.close();
+                    }else{
+                        cb(null,data);
+                    }
+                    client.close();
+                })
+            }
+        })
+    },
+
+    /**
+     * 用户管理的删除操作
+     * @param {Object} data 返回当前的_id
+     * @param {Function} cb 
+     */
+    delete(data,cb){
+        MongoClient.connect(url,function(err,client){
+            if(err){
+                cb({ code: -100, msg: '连接数据库失败' });
+            }else{
+                var db = client.db('firstProject');
+                var _id = parseInt(data);
+                db.collection('users').remove({_id : _id},function(err){
+                    if(err){
+                        cb({ code: -101, msg: '删除失败' });
+                    }else{
+                        cb(null);
+                    }
+                    client.close();
+                })
+            }
+        })
+    },
+
+    /**
+     * 用户列表修改操作
+     * @param {Object} data 
+     * @param {Function} cb 
+     */
+    update(data,cb){
+        MongoClient.connect(url,function(err,client){
+            if(err){
+                cb({ code: -100, msg: '连接数据库失败'});
+            }else{
+                var db = client.db('firstProject');
+                var id = parseInt(data.id);
+                db.collection('users').updateOne({_id : id},{$set:{
+                    username:data.username,
+                    nickname:data.nickname,
+                    phone:data.phone,
+                    age:data.age
+                }},function(err){
+                    if(err){
+                        cb({ code: -101, msg: '修改失败' });
+                        client.close();
+                    }else{
+                        cb(null);
+                    }
+                    client.close();
+                })
+            }
+
+        })
     }
+
 }
 module.exports = usersModel;

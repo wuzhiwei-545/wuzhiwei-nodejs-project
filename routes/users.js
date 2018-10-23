@@ -66,4 +66,32 @@ router.get('/logout',function(req,res){
   // res.redirect('/login.html');
   res.send('<script>location.replace("/")</script>');
 })
+
+
+//用户列表删除操作
+router.get('/delete',function(req,res){
+  var _id = req.query._id;
+  usersModel.delete(_id,function(err,data){
+    if(err){
+      res.render('weerror',err);
+    }else{
+      res.redirect('/user-manages.html');
+    }
+  })
+})
+
+//用户列表修改操作
+router.get('/update',function(req,res){
+  var msg = req.query;
+  usersModel.update(msg,function(err,data){
+    if(err){
+      res.render('weerror',err);
+    }else{
+      console.log(1111)
+      res.redirect('/user-manages.html');
+    }
+  })
+})
+
+
 module.exports = router;
