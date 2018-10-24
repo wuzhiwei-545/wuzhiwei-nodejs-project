@@ -114,5 +114,103 @@ router.post('/add',upload.single('mobileImg'),function(req,res){
     })
 })
 
+//删除手机
+router.get('/delete',function(req,res){
+    var fileName = req.query.fileName;
+    MongoClient.connect(url,function(err,client){
+        if(err){
+            console.log('数据库连接失败');
+            res.send({ code: -101, msg: '连接数据库失败' });
+        }else{
+            var db = client.db('firstProject');
+            db.collection('mobiles').remove({fileName:fileName},function(err){
+                if(err){
+                    console.log('删除失败');
+                    res.send({ code: -102, msg: '删除失败' });
+                }else{
+                    console.log('删除成功');
+                    res.send({ code: 100, msg: '删除成功'});
+                }
+                client.close();
+            })
+        }
+    })
+})
+
+//修改手机数据
+router.post('/update',upload.single('mobileImg'),function(req,res){
+    if(req.body.mobileImg == 'undefined'){
+        MongoClient.connect(url,function(err,client){
+            if(err){
+                console.log('连接数据库失败');
+                res.send({ code: -101, msg: '连接数据库失败'});
+            }else{
+                var db = client.db('firstProject');
+                var saveData = req.body;
+                console.log('11111111111', req.body)
+                db.collection('mobiles').updateOne({fileName:saveData.oldImg},{$set:{
+                    mobileName:saveData.mobileName,
+                    brand:saveData.brand,
+                    officialPrice:saveData.officialPrice,
+                    secondPrice:saveData.secondPrice
+                }},function(err){
+                    if(err){
+                        console.log('修改失败');
+                        res.send({ code: -102, msg: '修改失败'});
+                    }else{
+                        console.log('成功了');
+                        console.log('22222222222',saveData);
+                        res.send({ code: 100, msg: '修改成功'});
+                    }
+                    client.close();
+                })
+            }
+        })
+    }else{
+        fs.readFile(req.file.path,function(err,data){
+            if(err){
+                console.log('读文件失败',err);
+                res.send({ code: -1 , msg : '删除失败'});
+            }else{
+                var fileName = new Date().getTime() + '_' + req.file.originalname;
+                var des_file = path.resolve(__dirname,'../public/mobiles',fileName);
+                fs.writeFile(des_file,data,function(err){
+                    if(err){
+                        console.log(err);
+                        res.send({ code: -2 ,msg : '删除失败'});
+                    }else{
+                        console.log('写入成功');
+                        MongoClient.connect(url,function(err,client){
+                            if(err){
+                                console.log('连接数据库失败');
+                                res.send({ code: -101, msg: '连接数据库失败'});
+                            }else{
+                                var db = client.db('firstProject');
+                                var saveData = req.body;
+                                db.collection('mobiles').updateOne({fileName:saveData.oldImg},{$set:{
+                                    mobileName:saveData.mobileName,
+                                    brand:saveData.brand,
+                                    officialPrice:saveData.officialPrice,
+                                    secondPrice:saveData.secondPrice,
+                                    fileName:fileName
+                                }},function(err){
+                                    if(err){
+                                        console.log('修改失败');
+                                        res.send({ code: -102, msg: '修改失败'});
+                                    }else{
+                                        console.log('成功了');
+                                        console.log(saveData);
+                                        res.send({ code: 100, msg: '修改成功'});
+                                    }
+                                    client.close();
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
+})
 
 module.exports = router;

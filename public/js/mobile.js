@@ -8,7 +8,7 @@ function getList(){
         page: page,
         pageSize: pageSize
     },function(result){
-        console.log(result);
+        // console.log(result);
         if(result.code === 100){
             var list = result.data.list;
             var totalPage = result.data.totalPage;
@@ -22,9 +22,10 @@ function getList(){
                     <td>${list[i].officialPrice}</td>
                     <td>${list[i].secondPrice}</td>
                     <td>
-                        <a href="#">修改</a>
-                        <a href="#">删除</a>
+                        <a href="#" id="xiugai">修改</a>
+                        <a href="#" id="delete">删除</a>
                     </td>
+                    <td class="none">${list[i].fileName}</td>
                 </tr>`;
             }
             var pageStr = '';
@@ -92,7 +93,62 @@ $(function(){
 
     $(".pagination").on("click","li",function(){
         page = $(this).children().html();
-        console.log(page);
+        // console.log(page);
         getList();
     })
+    $('table').on('click','#delete',function(){
+        var deleteName = $(this).parent().parent().find('.none').html();
+        deleteList(deleteName);
+        getList();
+    }).on('click','#xiugai',function(){
+        $('#update').show();
+        $('#cName').val($(this).parent().parent().children('td:nth-child(3)').html());
+        $('#cBrand').val($(this).parent().parent().children('td:nth-child(4)').html());
+        $('#cOfficial').val($(this).parent().parent().children('td:nth-child(5)').html());
+        $('#cSecond').val($(this).parent().parent().children('td:nth-child(6)').html());
+        var oldImg = $(this).parent().parent().find('.none').html();
+        $('#sure').click(function(){
+            var formData = new FormData();
+            formData.append('mobileName',$('#cName').val());
+            formData.append('brand',$('#cBrand').val());
+            formData.append('officialPrice',$('#cOfficial').val());
+            formData.append('secondPrice',$('#cSecond').val());
+            formData.append('mobileImg',$('#cImg')[0].files[0]); //传送图片要改成dom对象.files[0]
+            formData.append('oldImg',oldImg);
+            $.ajax({
+                url: '/mobile/update',
+                method: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(result){
+                    console.log(result);
+                    if(result.code === 100){
+                        $('#update').hide();
+                        getList();
+                    }else{
+                        console.log(result.msg);
+                    }
+                },
+                error: function(){
+                    
+                }
+            })
+        })
+    })
+    $('.cancel').click(function(){
+        $('#update').hide();
+    })
 })
+
+//删除手机
+function deleteList(deleteName){
+    $.get('/mobile/delete',{fileName:deleteName},function(result){
+
+    })
+}
+
+//修改手机管理数据
+// function updateList(){
+    
+// }
