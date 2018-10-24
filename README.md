@@ -57,3 +57,15 @@ cookies  localstorage
 
 var nickname = new RegExp(nickname) => /zhangsan/
 db.find(nickname: nickname)
+
+
+
+#手机管理页面
+
+    1.上传图片
+    <form action="" method="" enctype=""></form>
+
+    enctype: 规定表单提交的时候，对数据的编码类型
+
+    1. 上传图片，首先要改 form 的 enctype
+    2. 要借助中间件 multer

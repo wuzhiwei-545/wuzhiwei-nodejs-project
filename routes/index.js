@@ -79,7 +79,11 @@ router.get('/user-manages.html',function(req,res){
 //手机管理页面
 router.get('/mobile-manages.html',function(req,res){
   if(req.cookies.username){
-    res.render('mobile-manages');
+    res.render('mobile-manages', {
+      username: req.cookies.username,
+      nickname: req.cookies.nickname,
+      isAdmin: parseInt(req.cookies.isAdmin) ? '(管理员)' : ''
+    });
   }else{
     res.redirect('/login.html');
   }

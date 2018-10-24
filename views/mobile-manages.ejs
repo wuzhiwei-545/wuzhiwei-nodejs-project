@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+  <div class="index">
+    <%- include('./common/header.ejs',{ nickname: nickname, isAdmin: isAdmin }) %>
+    <div class="container">
+      <%- include('./common/menu.ejs', { isAdmin: isAdmin }) %>
+      <div class="main">
+          <div class="addPhoneWrap">
+            <h2>新增</h2>
+            <form action="javascript:;" enctype="multipart/form-data">           
+                <div class="form-group">
+                    <label>手机名称：</label>
+                    <input type="text" id="mobileName" placeholder="请输入手机名称" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>所属品牌</label>
+                    <input type="text" id="brand" placeholder="请输入手机品牌" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>官方指导报价：</label>
+                    <input type="text" id="officialPrice" placeholder="官方指导价" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>二手回收价：</label>
+                    <input type="text" id="secondPrice" placeholder="二手价" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>图片：</label>
+                    <input type="file" id="mobileImg" class="form-control">
+                </div>
+                <div class="sure">确定</div> 
+                <div class="cancel">取消</div>             
+            </form>
+          </div>
+          <div id="addPhone">新增手机</div>
+          <table>
+              <thead>
+                  <tr>
+                      <th>序号</th>
+                      <th>图片</th>
+                      <th>手机名称</th>
+                      <th>所属品牌</th>
+                      <th>官方指导价</th>
+                      <th>二手回收价</th>
+                      <th>操作</th>
+                  </tr>
+              </thead>
+              <tbody>
+                        
+              </tbody>
+          </table>
+          <ul class="pagination">
+            
+          </ul>
+      </div>
+      <div id="update">
+        <h2>修改</h2>
+        <form action="" method="GET">
+            <div class="form-group">
+                <label>手机名称：</label>
+                <input type="text" name="mobilename" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>所属品牌</label>
+                <input type="text" name="brand" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>官方指导报价：</label>
+                <input type="text" name="officialprice" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>二手回收价：</label>
+                <input type="text" name="secondprice" class="form-control">
+            </div>
+            <input type="submit" class="sure" value="确定">
+            <div class="cancel">取消</div>
+            <input type="hidden" name="id">
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/js/mobile.js"></script>
