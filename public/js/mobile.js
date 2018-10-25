@@ -147,8 +147,3 @@ function deleteList(deleteName){
 
     })
 }
-
-//修改手机管理数据
-// function updateList(){
-    
-// }

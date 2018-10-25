@@ -88,6 +88,19 @@ router.get('/mobile-manages.html',function(req,res){
     res.redirect('/login.html');
   }
 })
+
+//品牌管理页面
+router.get('/brand-manages.html',function(req,res){
+  if(req.cookies.username){
+    res.render('brand-manages',{
+      username: req.cookies.username,
+      nickname: req.cookies.nickname,
+      isAdmin: parseInt(req.cookies.isAdmin) ? '(管理员)' : ''
+    })
+  }else{
+    res.redirect('/login.html');
+  }
+})
 module.exports = router;
 
 
