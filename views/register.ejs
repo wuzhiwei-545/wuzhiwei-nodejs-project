@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/register.css">
 </head>
 <body class="bg">
     <div class="container">
@@ -15,23 +16,28 @@
                 <form action="/users/register" method="POST">
                     <div class="form-group">
                         <label>用户名：</label>
-                        <input type="text" name="username" class="form-control" placeholder="请输入用户名">
+                        <input type="text" name="username" class="form-control" placeholder="请输入用户名" id="regUser">
+                        <div class="regUser">用户名不合法，请输入3-8字之间</div>
                     </div>
                     <div class="form-group">
                         <label>密码：</label>
-                        <input type="password" name="password" class="form-control" placeholder="请输入密码">
+                        <input type="password" name="password" class="form-control" placeholder="请输入密码" id="regPass">
+                        <div class="regPass">请输入8-16位密码</div>
                     </div>
                     <div class="form-group">
                             <label>确认密码：</label>
-                            <input type="password" name="repassword" class="form-control" placeholder="请重新输入密码">
+                            <input type="password" name="repassword" class="form-control" placeholder="请重新输入密码" id="regPwd">
+                            <div class="regPwd">密码不一致</div>
                     </div>
                     <div class="form-group">
                         <label>昵称：</label>
-                        <input type="text" name="nickname" class="form-control" placeholder="请输入昵称">
+                        <input type="text" name="nickname" class="form-control" placeholder="请输入昵称" id="regNic">
+                        <div class="regNic">请输入1-6位昵称</div>
                     </div>
                     <div class="form-group">
                         <label>手机号码：</label>
-                        <input type="text" name="phone" class="form-control" placeholder="请输入手机号码">
+                        <input type="text" name="phone" class="form-control" placeholder="请输入手机号码" id="regPhone">
+                        <div class="regPhone">请输入正确的手机号码</div>
                     </div>
                     <div class="form-group">
                         <label>是否是管理员：</label>
@@ -39,12 +45,13 @@
                         <input type="radio" name="isAdmin" value="0" checked>no
                     </div>
                     <button type="submit" class="btn btn-default btn-info btnRegister">注册</button>
-                    <a class="toLogin" href="#">直接登录</a>
+                    <a class="toLogin" href="/login.html">直接登录</a>
                 </form>
             </div>
         </div>
     </div>   
     <script src="/lib/jquery/jquery.min.js"></script>
     <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/registerReg.js"></script>
 </body>
 </html>

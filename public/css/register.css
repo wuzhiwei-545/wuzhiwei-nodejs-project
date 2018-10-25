@@ -1,0 +1,30 @@
+.regUser {
+    height: 20px;
+    background: orangered;
+    color: #fff;
+    display: none;
+}
+.regPass {
+    height: 20px;
+    background: orangered;
+    color: #fff;
+    display: none;
+}
+.regPwd {
+    height: 20px;
+    background: orangered;
+    color: #fff;
+    display: none;
+}
+.regNic {
+    height: 20px;
+    background: orangered;
+    color: #fff;
+    display: none;
+}
+.regPhone {
+    height: 20px;
+    background: orangered;
+    color: #fff;
+    display: none;
+}

@@ -213,7 +213,27 @@ router.post('/update',upload.single('mobileImg'),function(req,res){
     }
 })
 
-
+//遍历手机品牌数据
+router.get('/choose',function(req,res){
+    MongoClient.connect(url,function(err,client){
+        if(err){
+            console.log('连接数据库失败',err);
+            res.send({ code: -101, msg: '连接数据库失败' });
+        }else{
+            var db = client.db('firstProject');
+            db.collection('mobileLogos').find().toArray(function(err,data){
+                if(err){
+                    console.log('寻找数据失败');
+                    res.send({ code: -102, msg: '寻找数据失败' });
+                }else{
+                    console.log('成功');
+                    res.send({ code: 100, msg: '成功', data:data});
+                }
+                client.close();
+            })
+        }
+    })
+})
 
 
 module.exports = router;

@@ -55,12 +55,15 @@ $(function(){
     getList();
     $("#addPhone").click(function(){
         $(".addPhoneWrap").show();
+        chooseBrand();
     })
     $(".cancel").click(function(){
         $(".addPhoneWrap").hide();
+        $('#brand')[0].length = 1;
     })
 
     $(".sure").click(function(){
+
         //新增手机 使用 ajax 的方法 post 请求 $.ajax
 
         //自己模拟form表单
@@ -70,6 +73,7 @@ $(function(){
         formData.append('officialPrice',$('#officialPrice').val());
         formData.append('secondPrice',$('#secondPrice').val());
         formData.append('mobileImg',$('#mobileImg')[0].files[0]); //传送图片要改成dom对象.files[0]
+        $('#brand')[0].length = 1;
         $.ajax({
             url: 'mobile/add',
             method: 'post',
@@ -139,6 +143,11 @@ $(function(){
     $('.cancel').click(function(){
         $('#update').hide();
     })
+
+    //高亮
+    $('#lightPhone').css('color','#52cbc5');
+
+    
 })
 
 //删除手机
@@ -147,3 +156,16 @@ function deleteList(deleteName){
 
     })
 }
+
+//选择品牌下拉列表
+function chooseBrand(){
+    $.get('/mobile/choose',function(result){
+        if(result.code === 100){
+            for(var i=0;i<result.data.length;i++){
+                var option = `<option>${result.data[i].brand}</option>`;
+			    $('#brand').append(option);
+            }
+        }
+    })
+}
+  

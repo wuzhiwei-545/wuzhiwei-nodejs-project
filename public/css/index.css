@@ -53,10 +53,14 @@ a {
     flex: 1;
     height: 100%;
     padding: 30px;
+    background: url('/images/haizeiwang.jpg') no-repeat;
+    background-size: cover;
 }
 .main table {
     width: 100%;
     text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    /* opacity: 0.8; */
 }
 .main table th {
     border: 1px solid #000;
@@ -78,6 +82,7 @@ a {
     padding-left: 20px;
     overflow: hidden;
     margin: 20px;
+    background: #fff;
 }
 .nick {
     width: 260px;

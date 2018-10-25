@@ -124,6 +124,8 @@ $(function(){
     $('.cancel').click(function(){
         $('#update').hide();
     })
-
+    
+    //高亮
+    $('#lightBrand').css('color','#52cbc5');
     
 })
