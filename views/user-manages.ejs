@@ -40,7 +40,16 @@
                             <td><%= userList[i].username %></td>
                             <td><%= userList[i].nickname %></td>
                             <td><%= userList[i].phone %></td>
-                            <td><%= userList[i].sex || '-' %></td>
+                            <!-- <td><%= userList[i].sex || '-' %></td> -->
+                            <td>
+                                <% if(userList[i].sex == '0'){ %>
+                                    <%= '女' %>
+                                <% }else if(userList[i].sex == '1'){ %>
+                                    <%= '男' %>
+                                <% }else{ %>
+                                    <%= '-' %>
+                                <% } %>
+                            </td>
                             <td><%= userList[i].age || '-' %></td>
                             <td><%= parseInt(userList[i].is_admin) ? '是' : '否' %></td>
                             <td>
@@ -84,7 +93,7 @@
         <form action="/users/update" method="GET">
             <div class="form-group">
                 <label>用户名：</label>
-                <input type="text" name="username" class="form-control">
+                <input type="text" name="username" class="form-control" disabled>
             </div>
             <div class="form-group">
                 <label>昵称：</label>

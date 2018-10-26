@@ -279,10 +279,11 @@ const usersModel = {
                 var db = client.db('firstProject');
                 var id = parseInt(data.id);
                 db.collection('users').updateOne({_id : id},{$set:{
-                    username:data.username,
+                    // username:data.username,
                     nickname:data.nickname,
                     phone:data.phone,
-                    age:data.age
+                    age:data.age,
+                    sex:data.sex
                 }},function(err){
                     if(err){
                         cb({ code: -101, msg: '修改失败' });

@@ -30,7 +30,7 @@ $('#regPwd').focus(function(){
     }
 })
 
-var regNic = /^\w{1,6}$/;
+var regNic = /^\S{1,6}$/;
 $('#regNic').focus(function(){
     $('.regNic').hide();
 }).blur(function(){
